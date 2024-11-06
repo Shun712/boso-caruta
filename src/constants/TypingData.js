@@ -267,7 +267,7 @@ export const CHAR_TABLE = {
   "ぢぇ"	: ["DYE"],
   "ぢょ"	: ["DYO"],
   "でゃ"	: ["DHA"],
-  "でぃ"	: ["DHI"],
+  "でぃ"	: ["DHI", "DEXI", "DEXYI", "DELI", "DELYI"],
   "でゅ"	: ["DHU"],
   "でぇ"	: ["DHE"],
   "でょ"	: ["DHO"],
