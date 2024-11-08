@@ -721,9 +721,9 @@ var app = (function () {
     			attr_dev(img, "class", "app-vitalize-icon svelte-1gpu1vg");
     			if (!src_url_equal(img.src, img_src_value = "/logos/vitalize_logo.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "vitalize");
-    			add_location(img, file$6, 32, 14, 900);
+    			add_location(img, file$6, 32, 14, 835);
     			attr_dev(a, "href", "https://www.vitalize.co.jp");
-    			add_location(a, file$6, 31, 12, 848);
+    			add_location(a, file$6, 31, 12, 783);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -757,7 +757,7 @@ var app = (function () {
     			li = element("li");
     			t0 = text(/*$result*/ ctx[1]);
     			t1 = text("枚 GET!");
-    			add_location(li, file$6, 27, 12, 765);
+    			add_location(li, file$6, 27, 12, 700);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -798,11 +798,11 @@ var app = (function () {
     			attr_dev(img, "class", "sowfest svelte-1gpu1vg");
     			if (!src_url_equal(img.src, img_src_value = "/logos/sowfest.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "sowfest");
-    			add_location(img, file$6, 58, 10, 1745);
+    			add_location(img, file$6, 58, 10, 1680);
     			attr_dev(a, "href", "https://www.igoo.info/events/event/1726/");
-    			add_location(a, file$6, 57, 8, 1683);
+    			add_location(a, file$6, 57, 8, 1618);
     			attr_dev(div, "class", "site-header__end svelte-1gpu1vg");
-    			add_location(div, file$6, 56, 6, 1644);
+    			add_location(div, file$6, 56, 6, 1579);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -842,10 +842,10 @@ var app = (function () {
     			i = element("i");
     			t = text("ランキングを見る");
     			attr_dev(i, "class", "fa-solid fa-ranking-star");
-    			add_location(i, file$6, 52, 9, 1548);
-    			add_location(button, file$6, 51, 8, 1510);
+    			add_location(i, file$6, 52, 9, 1483);
+    			add_location(button, file$6, 51, 8, 1445);
     			attr_dev(div, "class", "site-header__end svelte-1gpu1vg");
-    			add_location(div, file$6, 50, 6, 1471);
+    			add_location(div, file$6, 50, 6, 1406);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -893,10 +893,10 @@ var app = (function () {
     			i = element("i");
     			t = text("スタート画面");
     			attr_dev(i, "class", "fa-solid fa-house");
-    			add_location(i, file$6, 46, 9, 1358);
-    			add_location(button, file$6, 45, 8, 1324);
+    			add_location(i, file$6, 46, 9, 1293);
+    			add_location(button, file$6, 45, 8, 1259);
     			attr_dev(div, "class", "site-header__end svelte-1gpu1vg");
-    			add_location(div, file$6, 44, 6, 1285);
+    			add_location(div, file$6, 44, 6, 1220);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -942,9 +942,9 @@ var app = (function () {
     			t0 = space();
     			t1 = text(/*$playTimeText*/ ctx[2]);
     			attr_dev(i, "class", "fa-solid fa-clock");
-    			add_location(i, file$6, 40, 8, 1143);
+    			add_location(i, file$6, 40, 8, 1078);
     			attr_dev(div, "class", "site-header__end math-font svelte-1gpu1vg");
-    			add_location(div, file$6, 39, 6, 1094);
+    			add_location(div, file$6, 39, 6, 1029);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1024,20 +1024,20 @@ var app = (function () {
     			attr_dev(img, "class", "app-icon svelte-1gpu1vg");
     			if (!src_url_equal(img.src, img_src_value = "/logos/karuta.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "bosokaruta");
-    			add_location(img, file$6, 19, 8, 486);
+    			add_location(img, file$6, 19, 8, 421);
     			attr_dev(p, "class", "app-title svelte-1gpu1vg");
-    			add_location(p, file$6, 20, 8, 562);
-    			attr_dev(a, "href", "https://www.kingofjmk.jp/%E4%B8%8A%E6%AF%9B%E3%81%8B%E3%82%8B%E3%81%9F%E5%85%A8%E6%9C%AD%E4%B8%80%E8%A6%A7/");
+    			add_location(p, file$6, 20, 8, 497);
+    			attr_dev(a, "href", "https://www.kodomo-kai.or.jp/chiba/karuta/");
     			attr_dev(a, "class", "brand svelte-1gpu1vg");
     			add_location(a, file$6, 15, 6, 322);
     			attr_dev(div0, "class", "site-header__start svelte-1gpu1vg");
     			add_location(div0, file$6, 14, 4, 283);
     			attr_dev(ul, "class", "nav__wrapper svelte-1gpu1vg");
-    			add_location(ul, file$6, 25, 8, 686);
+    			add_location(ul, file$6, 25, 8, 621);
     			attr_dev(nav, "class", "nav");
-    			add_location(nav, file$6, 24, 6, 660);
+    			add_location(nav, file$6, 24, 6, 595);
     			attr_dev(div1, "class", "site-header__middle svelte-1gpu1vg");
-    			add_location(div1, file$6, 23, 4, 620);
+    			add_location(div1, file$6, 23, 4, 555);
     			attr_dev(div2, "class", "wrapper site-header__wrapper svelte-1gpu1vg");
     			add_location(div2, file$6, 13, 2, 236);
     			attr_dev(header, "class", "site-header svelte-1gpu1vg");

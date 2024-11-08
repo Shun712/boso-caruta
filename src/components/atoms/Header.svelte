@@ -14,7 +14,7 @@
   <div class="wrapper site-header__wrapper">
     <div class="site-header__start">
       <a
-        href="https://www.kingofjmk.jp/%E4%B8%8A%E6%AF%9B%E3%81%8B%E3%82%8B%E3%81%9F%E5%85%A8%E6%9C%AD%E4%B8%80%E8%A6%A7/"
+        href="https://www.kodomo-kai.or.jp/chiba/karuta/"
         class="brand"
       >
         <img class="app-icon" src={"/logos/karuta.png"} alt="bosokaruta" />
