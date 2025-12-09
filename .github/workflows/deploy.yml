@@ -1,37 +1,52 @@
 name: EC2 auto deploy
 
 on:
- pull_request:
-   branches: [ main ]
-   types: [closed]
-
- workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+    types: [closed]
+  workflow_dispatch:
 
 jobs:
- build:
-   runs-on: ubuntu-latest
-   steps:
+  build:
+    runs-on: ubuntu-latest
+    steps:
 
-     # IP取得ライブラリをインストール
-     - name: Public IP Install
-       id: ip
-       uses: haythem/public-ip@v1.3
+      - name: Public IP Install
+        id: ip
+        uses: haythem/public-ip@v1.3
 
-     # BranchをCheckout
-     - name: Checkout
-       uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-     # デプロイする
-     - name: Deploy
-       run: |
+      - name: Deploy
+        run: |
+          REGION="ap-northeast-1"
 
-         # SSHのセキュリティグループを開放する
-         aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+          # SSHのセキュリティグループを開放
+          aws ec2 authorize-security-group-ingress \
+            --region $REGION \
+            --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
-         # SSH接続して、git pullする
-         echo "${{ secrets.GIT_PRIVATE_KEY }}" > private_key
-         chmod 600 private_key
-         ssh -oStrictHostKeyChecking=no ${{ secrets.EC2_USER_NAME }}@${{ secrets.EC2_HOST_NAME }} -i private_key "cd /var/www/html/プロジェクトディレクトリ && git fetch --prune && git checkout main && git pull origin main"
+          # 秘密鍵を保存
+          echo "${{ secrets.GIT_PRIVATE_KEY }}" > private_key
+          chmod 600 private_key
 
-         # SSHのセキュリティグループを閉じる
-         aws ec2 revoke-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32 --region ap-northeast-1
+          # EC2 に SSH ＆ git pull
+          ssh -oStrictHostKeyChecking=no \
+            ${{ secrets.EC2_USER_NAME }}@${{ secrets.EC2_HOST_NAME }} \
+            -i private_key \
+            "cd /var/www/html/プロジェクトディレクトリ && \
+             git fetch --prune && \
+             git checkout main && \
+             git pull origin main"
+
+          # SSH のセキュリティグループを閉じる
+          aws ec2 revoke-security-group-ingress \
+            --region $REGION \
+            --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
