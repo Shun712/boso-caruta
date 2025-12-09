@@ -3,28 +3,38 @@ name: EC2 auto deploy
 on:
   pull_request:
     branches: [ main ]
-    types: [closed]
+    types: [closed ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
 
-      - name: Public IP Install
+    steps:
+      # IP取得ライブラリ
+      - name: Get Public IP
         id: ip
         uses: haythem/public-ip@v1.3
 
+      # コードを checkout
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Deploy
+      # 🔥 ここが必須（AWS CLI の認証設定）🔥
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1    # ← region はここで指定
+
+      # デプロイ処理
+      - name: Deploy to EC2
         run: |
           REGION="ap-northeast-1"
 
-          # SSHのセキュリティグループを開放
+          # セキュリティグループを開放
           aws ec2 authorize-security-group-ingress \
-            --region $REGION \
             --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} \
             --protocol tcp \
             --port 22 \
@@ -34,18 +44,15 @@ jobs:
           echo "${{ secrets.GIT_PRIVATE_KEY }}" > private_key
           chmod 600 private_key
 
-          # EC2 に SSH ＆ git pull
+          # SSHして git pull
           ssh -oStrictHostKeyChecking=no \
             ${{ secrets.EC2_USER_NAME }}@${{ secrets.EC2_HOST_NAME }} \
             -i private_key \
             "cd /var/www/html/プロジェクトディレクトリ && \
-             git fetch --prune && \
-             git checkout main && \
-             git pull origin main"
+             git fetch --prune && git checkout main && git pull origin main"
 
-          # SSH のセキュリティグループを閉じる
+          # セキュリティグループを閉じる
           aws ec2 revoke-security-group-ingress \
-            --region $REGION \
             --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} \
             --protocol tcp \
             --port 22 \
