@@ -41,7 +41,9 @@ jobs:
             --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
           # 秘密鍵を保存
-          echo "${{ secrets.PRIVATE_KEY }}" > private_key
+          cat << 'EOF' > private_key
+          ${{ secrets.PRIVATE_KEY }}
+          EOF
           chmod 600 private_key
 
           # SSHして git pull
