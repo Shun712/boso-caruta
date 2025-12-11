@@ -50,7 +50,7 @@ jobs:
           ssh -oStrictHostKeyChecking=no \
             ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} \
             -i private_key \
-            "cd /var/www/html/boso-caruta && \
+            "cd /home/ec2-user/app/boso-caruta && \
              git fetch --prune && git checkout main && git pull origin main"
 
           # セキュリティグループを閉じる
