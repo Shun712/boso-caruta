@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: process.env.VITE_STORAGE_BUCKET,
   messagingSenderId: process.env.VITE_MESSAGING_SENDER_ID,
   appId: process.env.VITE_APP_ID,
-  measurementIdVITE_: process.env.MEASUREMENT_ID
+  measurementId: process.env.VITE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);

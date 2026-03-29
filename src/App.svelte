@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+	import { onMount } from "svelte";
 	import Header from "./components/atoms/Header.svelte";
 	import { isLogin, name, gameStatus } from "./lib/store.js";
 	import Game from "./pages/Game.svelte";

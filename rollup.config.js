@@ -54,7 +54,7 @@ export default {
 			'process.env.VITE_MESSAGING_SENDER_ID': JSON.stringify(process.env.VITE_MESSAGING_SENDER_ID),
 			'process.env.VITE_APP_ID': JSON.stringify(process.env.VITE_APP_ID),
 			'process.env.VITE_MEASUREMENT_ID': JSON.stringify(process.env.VITE_MEASUREMENT_ID),
-		  }),
+		}),
 		svelte({
 			preprocess: sveltePreprocess({
 				sourceMap: !production
