@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from "svelte";
 	import Header from "./components/atoms/Header.svelte";
 	import { isLogin, name, gameStatus } from "./lib/store.js";
 	import Game from "./pages/Game.svelte";
@@ -18,22 +17,20 @@
 		sound.play();
 	}
 
-	onMount(() => {
-		if (!$isLogin) {
-			const provider = new GoogleAuthProvider();
-			const auth = getAuth()
-			signInWithPopup(auth, provider).then((result) => {
-				$isLogin = true;
-				$name = result?.user?.displayName
-			}).catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				const email = error.email;
-				const credential = error.credential;
-				console.log(error+" ", errorCode+" ", errorMessage+" ", email+" ", credential);
-			});
-		}
-	})
+	function signIn() {
+		const provider = new GoogleAuthProvider();
+		const auth = getAuth();
+		signInWithPopup(auth, provider).then((result) => {
+			$isLogin = true;
+			$name = result?.user?.displayName;
+		}).catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			const email = error.email;
+			const credential = error.credential;
+			console.log(error+" ", errorCode+" ", errorMessage+" ", email+" ", credential);
+		});
+	}
 </script>
 
 <!-- 画面描画 -->
@@ -41,7 +38,7 @@
 
 <main on:keydown={playSound(keyStrokeSound)}>
 	{#if !$isLogin}
-		<img class="google-logo" src={"/logos/google-logo.gif"} alt="please login" />
+		<img class="google-logo" src={"/logos/google-logo.gif"} alt="please login" on:click={signIn} />
 	{:else if $gameStatus === "START"}
 		<Start on:playCardSound={playSound(getCardSound)} />
 	{:else if $gameStatus === "PLAYING"}
