@@ -1,11 +1,10 @@
 <script>
 	import Header from "./components/atoms/Header.svelte";
-	import { isLogin, name, gameStatus } from "./lib/store.js";
+	import { name, gameStatus } from "./lib/store.js";
 	import Game from "./pages/Game.svelte";
 	import Ranking from "./pages/Ranking.svelte";
 	import Result from "./pages/Result.svelte";
 	import Start from "./pages/Start.svelte";
-	import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 	let keyStrokeSound;
 	let getCardSound;
@@ -16,30 +15,13 @@
 		sound.currentTime = 0;
 		sound.play();
 	}
-
-	function signIn() {
-		const provider = new GoogleAuthProvider();
-		const auth = getAuth();
-		signInWithPopup(auth, provider).then((result) => {
-			$isLogin = true;
-			$name = result?.user?.displayName;
-		}).catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			const email = error.email;
-			const credential = error.credential;
-			console.log(error+" ", errorCode+" ", errorMessage+" ", email+" ", credential);
-		});
-	}
 </script>
 
 <!-- 画面描画 -->
 <Header />
 
 <main on:keydown={playSound(keyStrokeSound)}>
-	{#if !$isLogin}
-		<img class="google-logo" src={"/logos/google-logo.gif"} alt="please login" on:click={signIn} />
-	{:else if $gameStatus === "START"}
+	{#if $gameStatus === "START"}
 		<Start on:playCardSound={playSound(getCardSound)} />
 	{:else if $gameStatus === "PLAYING"}
 		<Game
@@ -77,10 +59,5 @@
 			max-width: none;
 			height: calc(100% - 2rem - 90px);
 		}
-	}
-
-	.google-logo {
-		width: 250px;
-		margin-top: 27vh;
 	}
 </style>
